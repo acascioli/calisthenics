@@ -15,10 +15,8 @@ export const LandingNavbar = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <header
-      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out bg-white backdrop-blur-md shadow-sm`}
-    >
-      <nav className="p-4 flex items-center justify-between">
+    <nav className="fixed bg-opacity-70 p-4 flex items-center justify-center bg-white backdrop-blur-md shadow-sm w-full">
+      <div className="flex items-center justify-between max-w-screen-2xl w-full">
         <Link href="/" className="flex items-center">
           <div className="relative h-8 w-8 mr-4">
             <Image fill alt="Logo" src="/logo.png" />
@@ -34,7 +32,7 @@ export const LandingNavbar = () => {
             </Button>
           </Link>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 };

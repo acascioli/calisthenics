@@ -13,6 +13,8 @@
     "@clerk/themes": "^1.7.5",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@supabase/supabase-js": "^2.33.1",
     "@tremor/react": "^3.6.5",
