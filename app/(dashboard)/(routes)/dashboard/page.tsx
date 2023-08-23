@@ -1,3 +1,5 @@
+import KPIs from "@/components/charts/KPIs";
+import { TrainingTracker } from "@/components/charts/training-tracker";
 import {
   Card,
   Grid,
@@ -9,6 +11,7 @@ import {
   TabPanel,
   TabPanels,
   Col,
+  Metric,
 } from "@tremor/react";
 
 export default function HomePage() {
@@ -22,26 +25,10 @@ export default function HomePage() {
           Keep track of your condition
         </p>
       </div>
-      <Grid numItemsMd={2} className="mt-6 gap-6">
-        <Card>
-          <div className="h-44" />
-        </Card>
-        <Card>
-          <div className="h-44" />
-        </Card>
-        <Card>
-          <div className="h-44" />
-        </Card>
-        <Card>
-          <div className="h-44" />
-        </Card>
-        <Card>
-          <div className="h-44" />
-        </Card>
-        <Card>
-          <div className="h-44" />
-        </Card>
-      </Grid>
+      <div className="px-4 md:px-8 prefers-color-scheme-tremor space-y-6">
+        <TrainingTracker />
+        <KPIs />
+      </div>
     </div>
   );
 }

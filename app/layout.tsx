@@ -14,8 +14,8 @@ const font = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "GreenTech",
-  description: "ESG Platform",
+  title: "CaliPiazza",
+  description: "Calisthenics Platform",
 };
 
 export default async function RootLayout({
