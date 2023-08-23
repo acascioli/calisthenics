@@ -8,6 +8,7 @@ import { useAuth } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import ThemeButton from "./theme-button";
 
 const font = Montserrat({ weight: "600", subsets: ["latin"] });
 
@@ -15,7 +16,7 @@ export const LandingNavbar = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <nav className="fixed bg-opacity-70 p-4 flex items-center justify-center bg-white backdrop-blur-md shadow-sm w-full">
+    <nav className="fixed bg-opacity-70 p-4 flex items-center justify-center backdrop-blur-md shadow-sm w-full">
       <div className="flex items-center justify-between max-w-screen-2xl w-full">
         <Link href="/" className="flex items-center">
           <div className="relative h-8 w-8 mr-4">
@@ -26,6 +27,7 @@ export const LandingNavbar = () => {
           </h1>
         </Link>
         <div className="flex items-center gap-x-2">
+          <ThemeButton />
           <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
             <Button variant="premium" className="rounded-full shadow-md">
               Start

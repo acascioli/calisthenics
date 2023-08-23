@@ -77,7 +77,7 @@ export const Sidebar = () => {
               className={cn(
                 "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-zinc-500 hover:bg-white/30 rounded-lg transition",
                 pathname === route.href
-                  ? "text-zinc-500 bg-blue-200"
+                  ? "text-zinc-500 dark:text-zinc-400 bg-blue-200 dark:bg-blue-800"
                   : "text-zinc-800 dark:text-zinc-400"
               )}
             >

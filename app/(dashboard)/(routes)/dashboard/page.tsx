@@ -1,18 +1,5 @@
 import KPIs from "@/components/charts/KPIs";
 import { TrainingTracker } from "@/components/charts/training-tracker";
-import {
-  Card,
-  Grid,
-  Title,
-  Text,
-  Tab,
-  TabList,
-  TabGroup,
-  TabPanel,
-  TabPanels,
-  Col,
-  Metric,
-} from "@tremor/react";
 
 export default function HomePage() {
   return (
