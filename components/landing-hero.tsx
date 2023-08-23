@@ -1,50 +1,35 @@
 "use client";
 
-import TypewriterComponent from "typewriter-effect";
-import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
-
 import { Button } from "@/components/ui/button";
 
 export const LandingHero = () => {
-  const { isSignedIn } = useAuth();
-
   return (
-    <div className="text-white font-bold py-36 text-center space-y-5">
-      <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold">
-        <h1>ESG tool</h1>
-        <div className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600 pb-2">
-          <TypewriterComponent
-            options={{
-              strings: [
-                "Report.",
-                "Materialità.",
-                "Obiettivi strategici.",
-                "GRI.",
-                "Sistemi di gestione.",
-              ],
-              autoStart: true,
-              loop: true,
-            }}
-          />
+    <div className="flex text-center pb-12 md:pb-16 h-full items-center justify-center">
+      <div>
+        <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4 max-w-3xl">
+          Let us help you manage your{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+            calisthenic
+          </span>{" "}
+          growth
+        </h1>
+        <div className="max-w-3xl mx-auto">
+          <p
+            className="text-xl text-gray-600 mb-8"
+            data-aos="zoom-y-out"
+            data-aos-delay="150"
+          >
+            Track your progress during your calisthenics journey and manage your
+            training schedule in one place.
+          </p>
+          <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center space-x-2">
+            <Button variant="premium" className="rounded-full shadow-md">
+              Start a free trial
+            </Button>
+            <Button className="rounded-full shadow-md">Learn more</Button>
+          </div>
         </div>
       </div>
-      <div className="text-sm md:text-xl font-light text-zinc-400">
-        Raccogli i dati in maniera smart
-      </div>
-      {/* <div>
-        <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button
-            variant="premium"
-            className="md:text-lg p-4 md:p-6 rounded-full font-semibold"
-          >
-            Start Generating For Free
-          </Button>
-        </Link>
-      </div> */}
-      {/* <div className="text-zinc-400 text-xs md:text-sm font-normal">
-        No credit card required.
-      </div> */}
     </div>
   );
 };
