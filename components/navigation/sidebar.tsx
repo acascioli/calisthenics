@@ -59,7 +59,7 @@ export const Sidebar = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="space-y-4 py-4 flex flex-col h-full shadow-lg bg-gradient-to-br from-blue-100 to-white dark:from-blue-950 dark:to-blue-900">
+    <div className="space-y-4 py-4 flex flex-col h-full shadow-lg bg-gradient-to-br from-blue-100 to-white dark:from-blue-950 dark:to-gray-950">
       <div className="px-3 py-2 flex-1">
         <Link href="/dashboard" className="flex items-center pl-3 mb-14">
           <div className="relative h-8 w-8 mr-4">
@@ -78,7 +78,7 @@ export const Sidebar = () => {
                 "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-zinc-500 hover:bg-white/30 rounded-lg transition",
                 pathname === route.href
                   ? "text-zinc-500 bg-blue-200"
-                  : "text-zinc-800"
+                  : "text-zinc-800 dark:text-zinc-400"
               )}
             >
               <div className="flex items-center flex-1">
