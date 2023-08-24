@@ -5,7 +5,7 @@ import * as fs from "fs";
 async function toJSON(body: any) {
   const reader = body.getReader(); // `ReadableStreamDefaultReader`
   const decoder = new TextDecoder();
-  const chunks = [];
+  const chunks: string[] = [];
 
   async function read() {
     const { done, value } = await reader.read();
