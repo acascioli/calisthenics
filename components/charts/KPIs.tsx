@@ -154,7 +154,7 @@ export default function KPIs() {
         const { data } = await supabase
           .from("measurements")
           .select("*")
-          .order("measure_date", { ascending: false });
+          .order("measure_date", { ascending: true });
         setMeasurements(data!);
       }
     };
@@ -198,10 +198,7 @@ export default function KPIs() {
         get_category("thigh", "Biceps", "cm", thigh),
       ];
       setCategories([...cats]);
-      console.log("ciao");
-      console.log(loading);
     } catch (e) {
-      console.log(e);
     } finally {
       setLoading(false);
     }
