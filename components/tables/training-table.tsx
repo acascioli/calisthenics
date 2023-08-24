@@ -40,7 +40,11 @@ export function TrainingTable({
             <TableCell className="text-center">{d.Execution}</TableCell>
             <TableCell className="text-center">
               {" "}
-              <ModalVideo video={d.Link!} />
+              {d.Link !== undefined ? (
+                <ModalVideo video={d.Link!} />
+              ) : (
+                <div></div>
+              )}
             </TableCell>
           </TableRow>
         ))}

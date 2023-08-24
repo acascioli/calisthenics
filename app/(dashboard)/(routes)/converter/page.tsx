@@ -105,6 +105,9 @@ export default function TrainingPage() {
           )}
           {loading && <ComponentLoader />}
         </div>
+        <p className="mt-4 font-semibold">
+          Note: save json in aws S3. Use folders named after the user_id.
+        </p>
       </div>
     </div>
   );
