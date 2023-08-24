@@ -208,46 +208,53 @@ export default function KPIs() {
   }, [getToken, measurements, setMeasurements, loading, setLoading]);
 
   return (
-    <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
+    <div>
       {categories ? (
-        categories!.map((item) => (
-          <Card key={item.title}>
-            <Flex alignItems="start">
-              <Text>{item.title}</Text>
-              <BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
-            </Flex>
-            <Flex
-              className="space-x-3 truncate"
-              justifyContent="start"
-              alignItems="baseline"
-            >
-              <Metric>{item.metric}</Metric>
-              <Text>from {item.metricPrev}</Text>
-            </Flex>
-            <AreaChart
-              className="mt-6 h-28"
-              data={item.data}
-              index="month"
-              valueFormatter={(number: number) =>
-                item.id != "weight"
-                  ? `cm ${Intl.NumberFormat("it-IT").format(number).toString()}`
-                  : `kg ${Intl.NumberFormat("it-IT").format(number).toString()}`
-              }
-              categories={["value"]}
-              // categories={[item.title]}
-              colors={["blue"]}
-              showXAxis={true}
-              showGridLines={false}
-              startEndOnly={true}
-              showYAxis={false}
-              showLegend={false}
-            />
-          </Card>
-        ))
+        <Grid numItemsSm={2} numItemsLg={3} className="gap-6">
+          {categories!.map((item) => (
+            <Card key={item.title}>
+              <Flex alignItems="start">
+                <Text>{item.title}</Text>
+                <BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
+              </Flex>
+              <Flex
+                className="space-x-3 truncate"
+                justifyContent="start"
+                alignItems="baseline"
+              >
+                <Metric>{item.metric}</Metric>
+                <Text>from {item.metricPrev}</Text>
+              </Flex>
+              <AreaChart
+                className="mt-6 h-28"
+                data={item.data}
+                index="month"
+                valueFormatter={(number: number) =>
+                  item.id != "weight"
+                    ? `cm ${Intl.NumberFormat("it-IT")
+                        .format(number)
+                        .toString()}`
+                    : `kg ${Intl.NumberFormat("it-IT")
+                        .format(number)
+                        .toString()}`
+                }
+                categories={["value"]}
+                // categories={[item.title]}
+                colors={["blue"]}
+                showXAxis={true}
+                showGridLines={false}
+                startEndOnly={true}
+                showYAxis={false}
+                showLegend={false}
+              />
+            </Card>
+          ))}
+          )
+        </Grid>
       ) : (
         <PageLoader />
         // <div>No entries yet...</div>
       )}
-    </Grid>
+    </div>
   );
 }
