@@ -17,6 +17,7 @@ import {
 } from "@tremor/react";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import PageLoader from "../page-loader";
 
 interface Category {
   id: string;
@@ -28,103 +29,43 @@ interface Category {
   data: { month: string; value: number }[];
 }
 
-const data = [
-  {
-    Month: "Jan 21",
-    Weight: 2890,
-    Biceps: 2400,
-    Chest: 4938,
-    waist: 4938,
-  },
-  {
-    Month: "Feb 21",
-    Weight: 1890,
-    Biceps: 1398,
-    Chest: 2938,
-    waist: 2938,
-  },
-  // ...
-  {
-    Month: "Jul 21",
-    Weight: 3490,
-    Biceps: 4300,
-    Chest: 2345,
-    waist: 2345,
-  },
-];
-
-// const categories: {
-//   title: string;
-//   metric: string;
-//   metricPrev: string;
-//   delta: string;
-//   deltaType: DeltaType;
-// }[] = [
-//   {
-//     title: "Weight",
-//     metric: "kg 80",
-//     metricPrev: "kg 85",
-//     delta: "34.3%",
-//     deltaType: "moderateIncrease",
-//   },
-//   {
-//     title: "Biceps",
-//     metric: "cm 50",
-//     metricPrev: "cm 45",
-//     delta: "18.1%",
-//     deltaType: "moderateIncrease",
-//   },
-//   {
-//     title: "Chest",
-//     metric: "cm 100",
-//     metricPrev: "cm 90",
-//     delta: "12.3%",
-//     deltaType: "moderateDecrease",
-//   },
-//   {
-//     title: "waist",
-//     metric: "cm 100",
-//     metricPrev: "cm 90",
-//     delta: "12.3%",
-//     deltaType: "moderateDecrease",
-//   },
-// ];
-
 export default function KPIs() {
   const { measurements, setMeasurements } = useMeasurements();
   const { getToken } = useAuth();
   const { loading, setLoading } = useLoading();
   const [categories, setCategories] = useState<Category[]>();
 
-  const processData = (
-    data: Measurements[],
-    measure: keyof typeof measurements
-  ) => {
-    const data_filtered = data.filter((d) => d[measure] !== 0);
-    const a = data_filtered.map((item: Measurements) =>
-      format(new Date(item.measure_date!), "MMM yy")
-    );
-    const b = data_filtered.map((item: Measurements) => item[measure]);
-
-    const sumByMonthMap = a.reduce((acc: any, month: any, index: number) => {
-      if (!acc[month]) {
-        acc[month] = b[index];
-      } else {
-        acc[month] += b[index];
-      }
-      return acc;
-    }, {});
-
-    const result = Object.keys(sumByMonthMap).map((month) => {
-      return {
-        month,
-        value: sumByMonthMap[month],
-      };
-    });
-    return result;
-  };
-
   useEffect(() => {
+    setLoading(true);
+
+    const processData = (
+      data: Measurements[],
+      measure: keyof typeof measurements
+    ) => {
+      const data_filtered = data.filter((d) => d[measure] !== 0);
+      const a = data_filtered.map((item: Measurements) =>
+        format(new Date(item.measure_date!), "MMM yy")
+      );
+      const b = data_filtered.map((item: Measurements) => item[measure]);
+
+      const sumByMonthMap = a.reduce((acc: any, month: any, index: number) => {
+        if (!acc[month]) {
+          acc[month] = b[index];
+        } else {
+          acc[month] += b[index];
+        }
+        return acc;
+      }, {});
+
+      const result = Object.keys(sumByMonthMap).map((month) => {
+        return {
+          month,
+          value: sumByMonthMap[month],
+        };
+      });
+      return result;
+    };
+
     const get_category = (
       id: string,
       title: string,
@@ -205,7 +146,6 @@ export default function KPIs() {
     };
 
     const loadTasks = async () => {
-      setLoading(true);
       if (measurements == null || measurements == undefined) {
         const supabaseAccessToken = await getToken({
           template: "supabase",
@@ -258,6 +198,8 @@ export default function KPIs() {
         get_category("thigh", "Biceps", "cm", thigh),
       ];
       setCategories([...cats]);
+      console.log("ciao");
+      console.log(loading);
     } catch (e) {
       console.log(e);
     } finally {
@@ -303,7 +245,8 @@ export default function KPIs() {
           </Card>
         ))
       ) : (
-        <div>No entries yet...</div>
+        <PageLoader />
+        // <div>No entries yet...</div>
       )}
     </Grid>
   );
