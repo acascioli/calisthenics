@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CalendarIcon, Check, PlusCircle, Zap } from "lucide-react";
 
 import {
@@ -34,18 +34,20 @@ import { supabaseClient } from "@/lib/superbase-client";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { addMeasureSchema } from "@/schemas/measurements-schema";
-import useMeasureModal from "@/app/hooks/use-measure-modal";
+import { Measurements, addMeasureSchema } from "@/schemas/measurements-schema";
 import useMeasurements from "@/app/hooks/use-measurements";
+import useModifyMeasureModal from "@/app/hooks/use-modify-measure-modal";
+import useSelectedId from "@/app/hooks/use_selected-measure";
 
 type MeasurementsFormValues = z.infer<typeof addMeasureSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<MeasurementsFormValues> = {};
 
-const MeasureModal = () => {
-  const measureModal = useMeasureModal();
+const ModifyMeasureModal = () => {
+  const modifyMeasureModal = useModifyMeasureModal();
   const { measurements, setMeasurements } = useMeasurements();
+  const { selectedId } = useSelectedId();
   const [loading, setLoading] = useState(false);
   const { getToken, userId } = useAuth();
 
@@ -54,6 +56,24 @@ const MeasureModal = () => {
     defaultValues,
     mode: "onChange",
   });
+
+  useEffect(() => {
+    if (measurements) {
+      const measurementData = measurements.filter(
+        (measurement: Measurements) => measurement.id == selectedId
+      )[0];
+      if (measurementData) {
+        form.setValue("weight", measurementData.weight);
+        form.setValue("biceps", measurementData.biceps);
+        form.setValue("chest", measurementData.chest);
+        form.setValue("waist", measurementData.waist);
+        form.setValue("buttocks", measurementData.buttocks);
+        form.setValue("calf", measurementData.calf);
+        form.setValue("thigh", measurementData.thigh);
+        form.setValue("measure_date", new Date(measurementData.measure_date!));
+      }
+    }
+  }, [measurements, selectedId, form]);
 
   const onSubmit = async (values: MeasurementsFormValues) => {
     try {
@@ -64,10 +84,24 @@ const MeasureModal = () => {
 
       const { data } = await supabase
         .from("measurements")
-        .insert({ ...values, user_id: userId })
-        .select()
-        .order("id");
-      setMeasurements([...measurements!, data![0]]);
+        .update({
+          weight: values.weight,
+          biceps: values.biceps,
+          chest: values.chest,
+          waist: values.waist,
+          buttocks: values.buttocks,
+          calf: values.calf,
+          thigh: values.thigh,
+          measure_date: values.measure_date,
+        })
+        .eq("id", selectedId)
+        .select();
+
+      const measurementIndex = measurements!.findIndex(
+        (measurement: Measurements) => measurement.id == selectedId
+      );
+      measurements![measurementIndex] = data![0];
+      setMeasurements([...measurements!]);
 
       toast.success("Registration completed.");
       form.reset();
@@ -75,18 +109,21 @@ const MeasureModal = () => {
       console.log(e);
       toast.error("Something went wrong...");
     } finally {
-      measureModal.onClose();
+      modifyMeasureModal.onClose();
     }
   };
 
   return (
-    <Dialog open={measureModal.isOpen} onOpenChange={measureModal.onClose}>
+    <Dialog
+      open={modifyMeasureModal.isOpen}
+      onOpenChange={modifyMeasureModal.onClose}
+    >
       <DialogContent className="h-[350px] md:h-auto">
         <ScrollArea className="h-[300px] p-4 md:p-0 md:h-full">
           <DialogHeader>
             <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
               <div className="flex items-center gap-x-2 font-bold text-xl">
-                Add measurements
+                Modify measurements
               </div>
             </DialogTitle>
             <DialogDescription className="text-center pt-2 space-y-2 font-medium">
@@ -310,7 +347,7 @@ const MeasureModal = () => {
                     variant="premium"
                     className="w-full"
                   >
-                    Add
+                    Confirm
                     <PlusCircle className="w-4 h-4 ml-2 " />
                   </Button>
                 </form>
@@ -323,4 +360,4 @@ const MeasureModal = () => {
   );
 };
 
-export default MeasureModal;
+export default ModifyMeasureModal;

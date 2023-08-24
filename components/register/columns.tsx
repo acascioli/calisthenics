@@ -69,7 +69,7 @@ export const columns: ColumnDef<Measurements>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("biceps")}
+          {row.getValue("biceps") !== 0 ? row.getValue("biceps") : ""}
         </div>
       );
     },
@@ -83,7 +83,7 @@ export const columns: ColumnDef<Measurements>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("chest")}
+          {row.getValue("chest") !== 0 ? row.getValue("chest") : ""}
         </div>
       );
     },
@@ -97,7 +97,7 @@ export const columns: ColumnDef<Measurements>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("waist")}
+          {row.getValue("waist") !== 0 ? row.getValue("waist") : ""}
         </div>
       );
     },
@@ -111,7 +111,7 @@ export const columns: ColumnDef<Measurements>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("buttocks")}
+          {row.getValue("buttocks") !== 0 ? row.getValue("buttocks") : ""}
         </div>
       );
     },
@@ -125,7 +125,7 @@ export const columns: ColumnDef<Measurements>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("calf")}
+          {row.getValue("calf") !== 0 ? row.getValue("calf") : ""}
         </div>
       );
     },
@@ -139,7 +139,7 @@ export const columns: ColumnDef<Measurements>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center">
-          {row.getValue("thigh")}
+          {row.getValue("thigh") !== 0 ? row.getValue("thigh") : ""}
         </div>
       );
     },

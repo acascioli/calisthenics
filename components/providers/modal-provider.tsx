@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import MeasureModal from "../modals/measure-modal";
+import ModifyMeasureModal from "../modals/modify-measure-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -16,6 +17,7 @@ export const ModalProvider = () => {
 
   return (
     <>
+      <ModifyMeasureModal />
       <MeasureModal />
     </>
   );

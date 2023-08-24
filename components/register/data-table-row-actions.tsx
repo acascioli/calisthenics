@@ -25,6 +25,7 @@ import { useCallback, useContext, useState } from "react";
 import { Measurements, measureSchema } from "@/schemas/measurements-schema";
 import useModifyMeasureModal from "@/app/hooks/use-modify-measure-modal";
 import useMeasurements from "@/app/hooks/use-measurements";
+import useSelectedId from "@/app/hooks/use_selected-measure";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -36,6 +37,7 @@ export function DataTableRowActions<TData>({
   const measurementsRow = measureSchema.parse(row.original);
   const modifyMeasurements = useModifyMeasureModal();
   const { measurements, setMeasurements } = useMeasurements();
+  const { setSelectedId } = useSelectedId();
 
   const { getToken } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +45,7 @@ export function DataTableRowActions<TData>({
   const router = useRouter();
 
   function modifyConsumption(id: number) {
-    // setSelectedTasksID(id);
+    setSelectedId(id);
     modifyMeasurements.onOpen();
   }
 
@@ -80,14 +82,13 @@ export function DataTableRowActions<TData>({
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
           <DotsHorizontalIcon className="h-4 w-4" />
-          <span className="sr-only">Apri il menù</span>
+          <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem onClick={() => modifyConsumption(measurementsRow.id)}>
           Modify
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => deleteTask(measurementsRow.id)}>
           Delete
