@@ -28,13 +28,9 @@ export async function POST(req: Request) {
     const fileData = req.body; // Assuming the file data is sent in the request body
     const jsonData = await toJSON(req.body);
 
-    fs.writeFile(
-      "../../../constants/myFile.json",
-      JSON.stringify(jsonData),
-      (err) => {
-        if (err) console.log("Error writing file:", err);
-      }
-    );
+    fs.writeFile("./data/training.json", JSON.stringify(jsonData), (err) => {
+      if (err) console.log("Error writing file:", err);
+    });
     return new NextResponse("Ok!", { status: 200 });
   } catch (error) {
     console.error("Error:", error);

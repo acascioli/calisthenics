@@ -3,56 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from "next/font/google";
-import {
-  BookPlus,
-  ClipboardList,
-  Code,
-  Factory,
-  Goal,
-  LayoutDashboard,
-  MessageSquare,
-  Settings,
-} from "lucide-react";
-import { usePathname } from "next/navigation";
 
+import { usePathname } from "next/navigation";
+import { routes } from "@/constatns/constants";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
 const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
-
-const routes = [
-  {
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-    color: "text-sky-500",
-  },
-  // {
-  //   label: "GRI",
-  //   icon: Goal,
-  //   href: "/gri",
-  //   color: "text-amber-500",
-  // },
-  {
-    label: "Register data",
-    icon: BookPlus,
-    color: "text-red-500",
-    bgColor: "bg-red-500/10",
-    href: "/data",
-  },
-  {
-    label: "Training",
-    icon: ClipboardList,
-    color: "text-sky-700",
-    bgColor: "bg-sky-700/10",
-    href: "/training",
-  },
-  {
-    label: "Impostazioni",
-    icon: Settings,
-    href: "/settings",
-  },
-];
 
 export const Sidebar = () => {
   const pathname = usePathname();
