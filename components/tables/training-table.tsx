@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -7,6 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useEffect } from "react";
+import training from "@/data/training.json" assert { type: "json" };
 
 const invoices = [
   {
@@ -53,22 +57,33 @@ const invoices = [
   },
 ];
 
-export function TrainingTable() {
+export function TrainingTable({
+  week,
+  month,
+  day,
+}: {
+  week: number;
+  month: number;
+  day: number;
+}) {
+  const data = training.filter(
+    (tr) => tr.Month === month && tr.Week === week && tr.Day === day
+  );
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Exercise</TableHead>
-          <TableHead>Execution</TableHead>
-          <TableHead>Link</TableHead>
+          <TableHead className="w-[300px]">Exercise</TableHead>
+          <TableHead className="w-[200px]">Execution</TableHead>
+          <TableHead>Video</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
+        {data.map((d) => (
+          <TableRow key={d.Exercise}>
+            <TableCell className="font-medium">{d.Exercise}</TableCell>
+            <TableCell>{d.Execution}</TableCell>
+            <TableCell>{d.Link}</TableCell>
           </TableRow>
         ))}
       </TableBody>

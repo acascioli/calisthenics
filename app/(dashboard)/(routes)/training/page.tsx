@@ -24,16 +24,16 @@ export default function TrainingPage() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <TrainingMonth month="month_1" />
+              <TrainingMonth month={1} />
             </TabPanel>
             <TabPanel>
-              <TrainingMonth month="month_2" />
+              <TrainingMonth month={2} />
             </TabPanel>
             <TabPanel>
-              <TrainingMonth month="month_3" />
+              <TrainingMonth month={3} />
             </TabPanel>
             <TabPanel>
-              <TrainingMonth month="month_4" />
+              <TrainingMonth month={4} />
             </TabPanel>
           </TabPanels>
         </TabGroup>
