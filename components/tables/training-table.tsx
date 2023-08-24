@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useEffect } from "react";
 import training from "@/data/training.json" assert { type: "json" };
+import ModalVideo from "../modals/modal-video";
 
 const invoices = [
   {
@@ -73,17 +74,20 @@ export function TrainingTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[300px]">Exercise</TableHead>
-          <TableHead className="w-[200px]">Execution</TableHead>
-          <TableHead>Video</TableHead>
+          <TableHead className="md:w-[350px]">Exercise</TableHead>
+          <TableHead className="text-center">Execution</TableHead>
+          <TableHead className="text-center">Video</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((d) => (
           <TableRow key={d.Exercise}>
             <TableCell className="font-medium">{d.Exercise}</TableCell>
-            <TableCell>{d.Execution}</TableCell>
-            <TableCell>{d.Link}</TableCell>
+            <TableCell className="text-center">{d.Execution}</TableCell>
+            <TableCell className="text-center">
+              {" "}
+              <ModalVideo video={d.Link!} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
