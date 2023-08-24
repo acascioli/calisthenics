@@ -249,7 +249,6 @@ export default function KPIs() {
               />
             </Card>
           ))}
-          )
         </Grid>
       ) : (
         <PageLoader />
