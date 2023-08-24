@@ -1,7 +1,13 @@
+"use client";
+
+import useLoading from "@/app/hooks/use-loading";
 import KPIs from "@/components/charts/KPIs";
 import { TrainingTracker } from "@/components/charts/training-tracker";
+import PageLoader from "@/components/page-loader";
 
 export default function HomePage() {
+  const { loading } = useLoading();
+
   return (
     <div>
       <div className="mb-8 space-y-4">
@@ -12,10 +18,14 @@ export default function HomePage() {
           Keep track of your condition
         </p>
       </div>
-      <div className="px-4 md:px-8 prefers-color-scheme-tremor space-y-6">
-        <TrainingTracker />
-        <KPIs />
-      </div>
+      {loading ? (
+        <PageLoader />
+      ) : (
+        <div className="px-4 md:px-8 prefers-color-scheme-tremor space-y-6">
+          <TrainingTracker />
+          <KPIs />
+        </div>
+      )}
     </div>
   );
 }
