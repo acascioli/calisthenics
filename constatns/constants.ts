@@ -27,7 +27,7 @@ export const routes = [
     icon: BookPlus,
     color: "text-red-500",
     bgColor: "bg-red-500/10",
-    href: "/data",
+    href: "/register",
   },
   {
     label: "Training",
@@ -44,7 +44,7 @@ export const routes = [
     href: "/converter",
   },
   {
-    label: "Impostazioni",
+    label: "Settings",
     icon: Settings,
     href: "/settings",
   },

@@ -3,8 +3,6 @@ import { TrainingMonth } from "@/components/tables/training-month";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
 import { ClipboardList } from "lucide-react";
 
-import Logo from "@/public/logo.png";
-
 export default function TrainingPage() {
   return (
     <div>
