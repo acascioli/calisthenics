@@ -3,10 +3,17 @@ import { ChefHat } from "lucide-react";
 import fs from "fs";
 import ReactMarkdown from "react-markdown";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@tremor/react";
+import path from "path";
 
 const getDocContent = () => {
-  const content_m = fs.readFileSync("data/diet_muscles.md", "utf8");
-  const content_w = fs.readFileSync("data/diet_lose_weight.md", "utf8");
+  const content_m = fs.readFileSync(
+    path.join(process.cwd(), "data", "diet_muscles.md"),
+    "utf8"
+  );
+  const content_w = fs.readFileSync(
+    path.join(process.cwd(), "data", "diet_lose_weight.md"),
+    "utf8"
+  );
   return { content_m, content_w };
 };
 
