@@ -1,0 +1,11 @@
+# Hello, MDX in NextJs
+
+Here is a regular paragraph
+
+here is a list:
+
+- Item one
+- Item two
+- Item three
+
+## This is an h2 element

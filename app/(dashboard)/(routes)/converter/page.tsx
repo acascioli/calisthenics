@@ -84,7 +84,7 @@ export default function TrainingPage() {
         iconColor="text-amber-700"
         bgColor="bg-amber-700/10"
       />
-      <div className="px-4 md:px-8space-y-6">
+      <div className="px-4 md:px-8 space-y-6">
         <div
           className={isDragActive ? dragAreaClassActive : dragAreaClass}
           {...getRootProps()}

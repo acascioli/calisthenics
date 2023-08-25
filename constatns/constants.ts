@@ -1,5 +1,6 @@
 import {
   BookPlus,
+  ChefHat,
   ClipboardList,
   Code,
   Factory,
@@ -35,6 +36,13 @@ export const routes = [
     color: "text-sky-700",
     bgColor: "bg-sky-700/10",
     href: "/training",
+  },
+  {
+    label: "Diet",
+    icon: ChefHat,
+    color: "text-green-700",
+    bgColor: "bg-green-700/10",
+    href: "/diet",
   },
   {
     label: "Converter",
