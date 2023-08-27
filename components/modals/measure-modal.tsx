@@ -37,6 +37,7 @@ import { format } from "date-fns";
 import { addMeasureSchema } from "@/schemas/measurements-schema";
 import useMeasureModal from "@/app/hooks/use-measure-modal";
 import useMeasurements from "@/app/hooks/use-measurements";
+import { DialogOverlay, DialogPortal } from "@radix-ui/react-dialog";
 
 type MeasurementsFormValues = z.infer<typeof addMeasureSchema>;
 
@@ -81,243 +82,243 @@ const MeasureModal = () => {
 
   return (
     <Dialog open={measureModal.isOpen} onOpenChange={measureModal.onClose}>
-      <DialogContent className="h-[350px] md:h-auto">
-        <ScrollArea className="h-[300px] p-4 md:p-0 md:h-full">
-          <DialogHeader>
-            <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
-              <div className="flex items-center gap-x-2 font-bold text-xl">
-                Add measurements
-              </div>
-            </DialogTitle>
-            <DialogDescription className="text-center pt-2 space-y-2 font-medium">
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8 px-2"
+      <DialogContent className="fixed h-auto w-5/6 overflow-y-auto">
+        {/* <ScrollArea className="h-[300px] p-4 md:p-0 md:h-full"> */}
+        <DialogHeader>
+          <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
+            <div className="flex items-center gap-x-2 font-bold text-xl">
+              Add measurements
+            </div>
+          </DialogTitle>
+          <DialogDescription className="text-center pt-2 md:space-y-2 font-medium">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8 md:px-2"
+              >
+                <div className="flex space-x-2">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="weight"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Weight [kg]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="biceps"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Biceps [cm]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex space-x-2">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="chest"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Chest [cm]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="waist"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Waist [cm]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex space-x-2">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="buttocks"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Buttocks [cm]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="calf"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Calf [cm]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex space-x-2">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="thigh"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Thigh [cm]"
+                              type="number"
+                              {...field}
+                              onChange={(event) =>
+                                field.onChange(+event.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="measure_date"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Descrizione</FormLabel> */}
+                          <FormControl>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <FormControl>
+                                  <Button
+                                    variant={"outline"}
+                                    className={cn(
+                                      "w-full pl-3 text-left font-normal",
+                                      !field.value && "text-muted-foreground"
+                                    )}
+                                  >
+                                    {field.value
+                                      ? format(field.value, "PPP")
+                                      : format(new Date(), "PPP")}
+
+                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                  </Button>
+                                </FormControl>
+                              </PopoverTrigger>
+                              <PopoverContent
+                                className="w-auto p-0"
+                                align="start"
+                              >
+                                <Calendar
+                                  mode="single"
+                                  selected={field.value}
+                                  onSelect={field.onChange}
+                                  // disabled={(date) => date < new Date()}
+                                  initialFocus
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  type="submit"
+                  // disabled={loading}
+                  size="lg"
+                  variant="premium"
+                  className="w-full"
                 >
-                  <div className="flex space-x-2">
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="weight"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Weight [kg]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="biceps"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Biceps [cm]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex space-x-2">
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="chest"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Chest [cm]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="waist"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Waist [cm]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex space-x-2">
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="buttocks"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Buttocks [cm]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="calf"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Calf [cm]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex space-x-2">
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="thigh"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Titolo</FormLabel> */}
-                            <FormControl>
-                              <Input
-                                placeholder="Thigh [cm]"
-                                type="number"
-                                {...field}
-                                onChange={(event) =>
-                                  field.onChange(+event.target.value)
-                                }
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <FormField
-                        control={form.control}
-                        name="measure_date"
-                        render={({ field }) => (
-                          <FormItem>
-                            {/* <FormLabel>Descrizione</FormLabel> */}
-                            <FormControl>
-                              <Popover>
-                                <PopoverTrigger asChild>
-                                  <FormControl>
-                                    <Button
-                                      variant={"outline"}
-                                      className={cn(
-                                        "w-full pl-3 text-left font-normal",
-                                        !field.value && "text-muted-foreground"
-                                      )}
-                                    >
-                                      {field.value
-                                        ? format(field.value, "PPP")
-                                        : format(new Date(), "PPP")}
-
-                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                    </Button>
-                                  </FormControl>
-                                </PopoverTrigger>
-                                <PopoverContent
-                                  className="w-auto p-0"
-                                  align="start"
-                                >
-                                  <Calendar
-                                    mode="single"
-                                    selected={field.value}
-                                    onSelect={field.onChange}
-                                    // disabled={(date) => date < new Date()}
-                                    initialFocus
-                                  />
-                                </PopoverContent>
-                              </Popover>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    // disabled={loading}
-                    size="lg"
-                    variant="premium"
-                    className="w-full"
-                  >
-                    Add
-                    <PlusCircle className="w-4 h-4 ml-2 " />
-                  </Button>
-                </form>
-              </Form>
-            </DialogDescription>
-          </DialogHeader>
-        </ScrollArea>
+                  Add
+                  <PlusCircle className="w-4 h-4 ml-2 " />
+                </Button>
+              </form>
+            </Form>
+          </DialogDescription>
+        </DialogHeader>
+        {/* </ScrollArea> */}
       </DialogContent>
     </Dialog>
   );
