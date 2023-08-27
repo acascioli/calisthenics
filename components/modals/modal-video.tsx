@@ -57,19 +57,9 @@ export default function ModalVideo({ video }: ModalVideoProps) {
             leaveFrom="oopacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="max-w-6xl mx-auto h-full flex items-center">
-              <Dialog.Panel className="w-full max-h-full aspect-video bg-black overflow-hidden">
-                <ReactPlayer url={video} />
-                {/* <video
-                  ref={videoRef}
-                  width={videoWidth}
-                  height={videoHeight}
-                  loop
-                  controls
-                >
-                  <source src={video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video> */}
+            <div className="max-w-6xl mx-auto h-full md:min-w-xl flex items-center">
+              <Dialog.Panel className="max-h-full md:w-[600px] aspect-video bg-black overflow-hidden">
+                <ReactPlayer url={video} controls width="100%" height="100%" />
               </Dialog.Panel>
             </div>
           </Transition.Child>
