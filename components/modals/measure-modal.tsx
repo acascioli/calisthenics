@@ -27,7 +27,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuth, useOrganization } from "@clerk/nextjs";
 import { toast } from "react-hot-toast";
 import { supabaseClient } from "@/lib/superbase-client";
