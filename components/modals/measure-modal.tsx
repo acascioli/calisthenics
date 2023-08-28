@@ -66,12 +66,15 @@ const MeasureModal = () => {
         .from("measurements")
         .insert({
           weight: parseFloat(values.weight),
-          biceps: values.biceps ? parseFloat(values.biceps!) : 0,
+          neck: values.neck ? parseFloat(values.neck!) : 0,
           chest: values.chest ? parseFloat(values.chest!) : 0,
+          biceps: values.biceps ? parseFloat(values.biceps!) : 0,
+          abdomen: values.abdomen ? parseFloat(values.abdomen!) : 0,
           waist: values.waist ? parseFloat(values.waist!) : 0,
+          hip: values.hip ? parseFloat(values.hip!) : 0,
           buttocks: values.buttocks ? parseFloat(values.buttocks!) : 0,
-          calf: values.calf ? parseFloat(values.calf!) : 0,
           thigh: values.thigh ? parseFloat(values.thigh!) : 0,
+          calf: values.calf ? parseFloat(values.calf!) : 0,
           measure_date: values.measure_date,
           user_id: userId,
         })
@@ -128,13 +131,13 @@ const MeasureModal = () => {
                   <div className="flex-1">
                     <FormField
                       control={form.control}
-                      name="biceps"
+                      name="neck"
                       render={({ field }) => (
                         <FormItem>
                           {/* <FormLabel>Titolo</FormLabel> */}
                           <FormControl>
                             <Input
-                              placeholder="Biceps [cm]"
+                              placeholder="Neck [cm]"
                               type="number"
                               {...field}
                             />
@@ -168,6 +171,46 @@ const MeasureModal = () => {
                   <div className="flex-1">
                     <FormField
                       control={form.control}
+                      name="biceps"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Biceps [cm]"
+                              type="number"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex space-x-2">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="abdomen"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Abdomen [cm]"
+                              type="number"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
                       name="waist"
                       render={({ field }) => (
                         <FormItem>
@@ -189,6 +232,25 @@ const MeasureModal = () => {
                   <div className="flex-1">
                     <FormField
                       control={form.control}
+                      name="hip"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Hip [cm]"
+                              type="number"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
                       name="buttocks"
                       render={({ field }) => (
                         <FormItem>
@@ -196,6 +258,28 @@ const MeasureModal = () => {
                           <FormControl>
                             <Input
                               placeholder="Buttocks [cm]"
+                              type="number"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex space-x-2">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="thigh"
+                      render={({ field }) => (
+                        <FormItem>
+                          {/* <FormLabel>Titolo</FormLabel> */}
+                          <FormControl>
+                            <Input
+                              placeholder="Thigh [cm]"
                               type="number"
                               {...field}
                             />
@@ -225,72 +309,46 @@ const MeasureModal = () => {
                     />
                   </div>
                 </div>
-                <div className="flex space-x-2">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="thigh"
-                      render={({ field }) => (
-                        <FormItem>
-                          {/* <FormLabel>Titolo</FormLabel> */}
-                          <FormControl>
-                            <Input
-                              placeholder="Thigh [cm]"
-                              type="number"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="measure_date"
-                      render={({ field }) => (
-                        <FormItem>
-                          {/* <FormLabel>Descrizione</FormLabel> */}
-                          <FormControl>
-                            <Popover>
-                              <PopoverTrigger asChild>
-                                <FormControl>
-                                  <Button
-                                    variant={"outline"}
-                                    className={cn(
-                                      "w-full pl-3 text-left font-normal",
-                                      !field.value && "text-muted-foreground"
-                                    )}
-                                  >
-                                    {field.value
-                                      ? format(field.value, "PPP")
-                                      : format(new Date(), "PPP")}
-
-                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                  </Button>
-                                </FormControl>
-                              </PopoverTrigger>
-                              <PopoverContent
-                                className="w-auto p-0"
-                                align="start"
+                <FormField
+                  control={form.control}
+                  name="measure_date"
+                  render={({ field }) => (
+                    <FormItem>
+                      {/* <FormLabel>Descrizione</FormLabel> */}
+                      <FormControl>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
                               >
-                                <Calendar
-                                  mode="single"
-                                  selected={field.value}
-                                  onSelect={field.onChange}
-                                  // disabled={(date) => date < new Date()}
-                                  initialFocus
-                                />
-                              </PopoverContent>
-                            </Popover>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
+                                {field.value
+                                  ? format(field.value, "PPP")
+                                  : format(new Date(), "PPP")}
+
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              // disabled={(date) => date < new Date()}
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <Button
                   type="submit"
