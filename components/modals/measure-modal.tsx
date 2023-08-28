@@ -91,7 +91,7 @@ const MeasureModal = () => {
 
   return (
     <Dialog open={measureModal.isOpen} onOpenChange={measureModal.onClose}>
-      <DialogContent className="fixed h-auto w-5/6 overflow-y-auto border-none rounded-lg shadow-xl">
+      <DialogContent className="fixed h-auto w-5/6 overflow-y-auto border-none rounded-lg shadow-xl dark:shadow-blue-900">
         {/* <ScrollArea className="h-[300px] p-4 md:p-0 md:h-full"> */}
         <DialogHeader>
           <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">

@@ -117,7 +117,7 @@ const ModifyMeasureModal = () => {
       open={modifyMeasureModal.isOpen}
       onOpenChange={modifyMeasureModal.onClose}
     >
-      <DialogContent className="fixed h-auto w-5/6 overflow-y-auto border-none rounded-lg shadow-xl">
+      <DialogContent className="fixed h-auto w-5/6 overflow-y-auto border-none rounded-lg shadow-x dark:shadow-blue-900">
         <DialogHeader>
           <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
             <div className="flex items-center gap-x-2 font-bold text-xl">

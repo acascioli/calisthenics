@@ -62,14 +62,14 @@ export const columns: ColumnDef<Measurements>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "biceps",
+    accessorKey: "neck",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Biceps [cm]" />
+      <DataTableColumnHeader column={column} title="Neck [cm]" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("biceps") !== 0 ? row.getValue("biceps") : ""}
+          {row.getValue("neck") !== 0 ? row.getValue("neck") : ""}
         </div>
       );
     },
@@ -90,6 +90,34 @@ export const columns: ColumnDef<Measurements>[] = [
     enableHiding: true,
   },
   {
+    accessorKey: "biceps",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Biceps [cm]" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[80px] items-center justify-center ">
+          {row.getValue("biceps") !== 0 ? row.getValue("biceps") : ""}
+        </div>
+      );
+    },
+    enableHiding: true,
+  },
+  {
+    accessorKey: "abdomen",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Abdomen [cm]" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[80px] items-center justify-center ">
+          {row.getValue("abdomen") !== 0 ? row.getValue("abdomen") : ""}
+        </div>
+      );
+    },
+    enableHiding: true,
+  },
+  {
     accessorKey: "waist",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Waist [cm]" />
@@ -98,6 +126,20 @@ export const columns: ColumnDef<Measurements>[] = [
       return (
         <div className="flex w-[80px] items-center justify-center ">
           {row.getValue("waist") !== 0 ? row.getValue("waist") : ""}
+        </div>
+      );
+    },
+    enableHiding: true,
+  },
+  {
+    accessorKey: "hip",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Hip [cm]" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[80px] items-center justify-center ">
+          {row.getValue("hip") !== 0 ? row.getValue("hip") : ""}
         </div>
       );
     },
@@ -118,20 +160,6 @@ export const columns: ColumnDef<Measurements>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "calf",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Calf [cm]" />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex w-[80px] items-center justify-center ">
-          {row.getValue("calf") !== 0 ? row.getValue("calf") : ""}
-        </div>
-      );
-    },
-    enableHiding: true,
-  },
-  {
     accessorKey: "thigh",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Thigh [cm]" />
@@ -140,6 +168,20 @@ export const columns: ColumnDef<Measurements>[] = [
       return (
         <div className="flex w-[80px] items-center justify-center">
           {row.getValue("thigh") !== 0 ? row.getValue("thigh") : ""}
+        </div>
+      );
+    },
+    enableHiding: true,
+  },
+  {
+    accessorKey: "calf",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Calf [cm]" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[80px] items-center justify-center ">
+          {row.getValue("calf") !== 0 ? row.getValue("calf") : ""}
         </div>
       );
     },

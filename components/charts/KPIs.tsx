@@ -164,17 +164,29 @@ export default function KPIs() {
         measurements!,
         "weight" as keyof typeof measurements
       );
-      const biceps = processData(
+      const neck = processData(
         measurements!,
-        "biceps" as keyof typeof measurements
+        "neck" as keyof typeof measurements
       );
       const chest = processData(
         measurements!,
         "chest" as keyof typeof measurements
       );
+      const biceps = processData(
+        measurements!,
+        "biceps" as keyof typeof measurements
+      );
+      const abdomen = processData(
+        measurements!,
+        "abdomen" as keyof typeof measurements
+      );
       const waist = processData(
         measurements!,
         "waist" as keyof typeof measurements
+      );
+      const hip = processData(
+        measurements!,
+        "hip" as keyof typeof measurements
       );
       const buttocks = processData(
         measurements!,
@@ -190,12 +202,15 @@ export default function KPIs() {
       );
       const cats: Category[] = [
         get_category("weight", "Weight", "kg", weight),
+        get_category("neck", "Neck", "cm", neck),
+        get_category("chest", "Chest", "cm", chest),
         get_category("biceps", "Biceps", "cm", biceps),
-        get_category("chest", "Biceps", "cm", chest),
-        get_category("waist", "Biceps", "cm", waist),
-        get_category("buttocks", "Biceps", "cm", buttocks),
-        get_category("calf", "Biceps", "cm", calf),
-        get_category("thigh", "Biceps", "cm", thigh),
+        get_category("abdomen", "Abdomen", "cm", abdomen),
+        get_category("waist", "Waist", "cm", waist),
+        get_category("hip", "Hip", "cm", hip),
+        get_category("buttocks", "Buttocks", "cm", buttocks),
+        get_category("thigh", "Thigh", "cm", thigh),
+        get_category("calf", "Calf", "cm", calf),
       ];
       setCategories([...cats]);
     } catch (e) {

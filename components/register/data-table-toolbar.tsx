@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { DataTableViewOptions } from "./data-table-view-options";
 import useMeasureModal from "@/app/hooks/use-measure-modal";
+import { LucideShieldQuestion } from "lucide-react";
+import useInfoModal from "@/app/hooks/use-info-modal";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -19,6 +21,7 @@ export function DataTableToolbar<TData>({
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const measureModal = useMeasureModal();
+  const infoModal = useInfoModal();
 
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between">
@@ -45,6 +48,15 @@ export function DataTableToolbar<TData>({
         )}
       </div>
       <div className="flex mt-4 lg:mt-0">
+        <Button
+          // variant="premium"
+          onClick={infoModal.onOpen}
+          size="sm"
+          className="h-8 border-dashed mr-2"
+        >
+          <LucideShieldQuestion className="mr-2 h-4 w-4" />
+          Info
+        </Button>
         <Button
           variant="premium"
           onClick={measureModal.onOpen}
