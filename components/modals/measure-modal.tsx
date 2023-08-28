@@ -64,7 +64,17 @@ const MeasureModal = () => {
 
       const { data } = await supabase
         .from("measurements")
-        .insert({ ...values, user_id: userId })
+        .insert({
+          weight: parseFloat(values.weight),
+          biceps: values.biceps ? parseFloat(values.biceps!) : 0,
+          chest: values.chest ? parseFloat(values.chest!) : 0,
+          waist: values.waist ? parseFloat(values.waist!) : 0,
+          buttocks: values.buttocks ? parseFloat(values.buttocks!) : 0,
+          calf: values.calf ? parseFloat(values.calf!) : 0,
+          thigh: values.thigh ? parseFloat(values.thigh!) : 0,
+          measure_date: values.measure_date,
+          user_id: userId,
+        })
         .select()
         .order("id");
       setMeasurements([...measurements!, data![0]]);
@@ -108,9 +118,6 @@ const MeasureModal = () => {
                               placeholder="Weight [kg]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -130,9 +137,6 @@ const MeasureModal = () => {
                               placeholder="Biceps [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -154,9 +158,6 @@ const MeasureModal = () => {
                               placeholder="Chest [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -176,9 +177,6 @@ const MeasureModal = () => {
                               placeholder="Waist [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -200,9 +198,6 @@ const MeasureModal = () => {
                               placeholder="Buttocks [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -222,9 +217,6 @@ const MeasureModal = () => {
                               placeholder="Calf [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -246,9 +238,6 @@ const MeasureModal = () => {
                               placeholder="Thigh [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />

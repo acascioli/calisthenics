@@ -62,13 +62,13 @@ const ModifyMeasureModal = () => {
         (measurement: Measurements) => measurement.id == selectedId
       )[0];
       if (measurementData) {
-        form.setValue("weight", measurementData.weight);
-        form.setValue("biceps", measurementData.biceps);
-        form.setValue("chest", measurementData.chest);
-        form.setValue("waist", measurementData.waist);
-        form.setValue("buttocks", measurementData.buttocks);
-        form.setValue("calf", measurementData.calf);
-        form.setValue("thigh", measurementData.thigh);
+        form.setValue("weight", measurementData.weight.toString());
+        form.setValue("biceps", measurementData.biceps!.toString());
+        form.setValue("chest", measurementData.chest!.toString());
+        form.setValue("waist", measurementData.waist!.toString());
+        form.setValue("buttocks", measurementData.buttocks!.toString());
+        form.setValue("calf", measurementData.calf!.toString());
+        form.setValue("thigh", measurementData.thigh!.toString());
         form.setValue("measure_date", new Date(measurementData.measure_date!));
       }
     }
@@ -84,13 +84,13 @@ const ModifyMeasureModal = () => {
       const { data } = await supabase
         .from("measurements")
         .update({
-          weight: values.weight,
-          biceps: values.biceps,
-          chest: values.chest,
-          waist: values.waist,
-          buttocks: values.buttocks,
-          calf: values.calf,
-          thigh: values.thigh,
+          weight: parseFloat(values.weight),
+          biceps: parseFloat(values.biceps!),
+          chest: parseFloat(values.chest!),
+          waist: parseFloat(values.waist!),
+          buttocks: parseFloat(values.buttocks!),
+          calf: parseFloat(values.calf!),
+          thigh: parseFloat(values.thigh!),
           measure_date: values.measure_date,
         })
         .eq("id", selectedId)
@@ -143,9 +143,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Weight [kg]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -165,9 +162,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Biceps [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -189,9 +183,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Chest [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -211,9 +202,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Waist [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -235,9 +223,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Buttocks [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -257,9 +242,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Calf [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
@@ -281,9 +263,6 @@ const ModifyMeasureModal = () => {
                               placeholder="Thigh [cm]"
                               type="number"
                               {...field}
-                              onChange={(event) =>
-                                field.onChange(+event.target.value)
-                              }
                             />
                           </FormControl>
                           <FormMessage />
