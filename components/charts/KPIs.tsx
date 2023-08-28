@@ -81,10 +81,7 @@ export default function KPIs() {
             metricPrev: `${unit} 0`,
             delta: "0 %",
             deltaType: "unchanged",
-            data: [
-              { month: "Gen 21", value: 0 },
-              { month: "Ago 21", value: 0 },
-            ],
+            data: [{ month: format(new Date(), "MMM yy"), value: 0 }],
           };
           return cat;
         }
@@ -122,7 +119,7 @@ export default function KPIs() {
             deltaType: "unchanged",
             data: [
               {
-                month: format(new Date(data.at(-1)!.month), "MMM yy"),
+                month: data.at(-1)!.month,
                 value: data.at(-1)!.value,
               },
             ],
@@ -137,10 +134,7 @@ export default function KPIs() {
         metricPrev: `${unit} 0`,
         delta: "0 %",
         deltaType: "unchanged",
-        data: [
-          { month: "Gen 21", value: 0 },
-          { month: "Ago 21", value: 0 },
-        ],
+        data: [{ month: format(new Date(), "MMM yy"), value: 0 }],
       };
       return cat;
     };
@@ -160,6 +154,10 @@ export default function KPIs() {
     };
     try {
       loadTasks();
+      const bf_index = processData(
+        measurements!,
+        "bf_index" as keyof typeof measurements
+      );
       const weight = processData(
         measurements!,
         "weight" as keyof typeof measurements
@@ -201,6 +199,7 @@ export default function KPIs() {
         "thigh" as keyof typeof measurements
       );
       const cats: Category[] = [
+        get_category("bf_index", "Body fat index", "%", bf_index),
         get_category("weight", "Weight", "kg", weight),
         get_category("neck", "Neck", "cm", neck),
         get_category("chest", "Chest", "cm", chest),

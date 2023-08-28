@@ -64,7 +64,7 @@ export function DataTableRowActions<TData>({
         )
       );
 
-      toast.success("Task deleted.");
+      toast.success("Measure deleted.");
       // fetchPosts()
     } catch (e) {
       toast.error("Something went wrong...");

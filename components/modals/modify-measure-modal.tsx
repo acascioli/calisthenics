@@ -37,6 +37,11 @@ import { Measurements, addMeasureSchema } from "@/schemas/measurements-schema";
 import useMeasurements from "@/app/hooks/use-measurements";
 import useModifyMeasureModal from "@/app/hooks/use-modify-measure-modal";
 import useSelectedId from "@/app/hooks/use_selected-measure";
+import {
+  calculateBodyFatFemale,
+  calculateBodyFatMale,
+} from "@/lib/body-fat-index";
+import usePersonalData from "@/app/hooks/use-personal-data";
 
 type MeasurementsFormValues = z.infer<typeof addMeasureSchema>;
 
@@ -46,6 +51,7 @@ const defaultValues: Partial<MeasurementsFormValues> = {};
 const ModifyMeasureModal = () => {
   const modifyMeasureModal = useModifyMeasureModal();
   const { measurements, setMeasurements } = useMeasurements();
+  const { personalData, setPersonalData } = usePersonalData();
   const { selectedId } = useSelectedId();
   const [loading, setLoading] = useState(false);
   const { getToken, userId } = useAuth();
@@ -78,6 +84,28 @@ const ModifyMeasureModal = () => {
   }, [measurements, selectedId, form]);
 
   const onSubmit = async (values: MeasurementsFormValues) => {
+    let bf = 0;
+    if (personalData) {
+      if (personalData!.gender == "male") {
+        if (values.abdomen && values.neck && personalData?.height) {
+          bf = calculateBodyFatMale(
+            parseFloat(values.abdomen),
+            parseFloat(values.neck),
+            personalData.height
+          );
+        }
+      }
+      if (personalData!.gender == "female") {
+        if (values.waist && values.hip && values.neck && personalData?.height) {
+          bf = calculateBodyFatFemale(
+            parseFloat(values.waist),
+            parseFloat(values.hip),
+            parseFloat(values.neck),
+            personalData.height
+          );
+        }
+      }
+    }
     try {
       const supabaseAccessToken = await getToken({
         template: "supabase",
@@ -87,6 +115,7 @@ const ModifyMeasureModal = () => {
       const { data } = await supabase
         .from("measurements")
         .update({
+          bf_index: bf,
           weight: parseFloat(values.weight),
           neck: parseFloat(values.neck!),
           chest: parseFloat(values.chest!),

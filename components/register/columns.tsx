@@ -188,6 +188,20 @@ export const columns: ColumnDef<Measurements>[] = [
     enableHiding: true,
   },
   {
+    accessorKey: "bf_index",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Body fat [%]" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex w-[80px] items-center justify-center">
+          {row.getValue("bf_index") !== 0 ? row.getValue("bf_index") : ""}
+        </div>
+      );
+    },
+    enableHiding: true,
+  },
+  {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },

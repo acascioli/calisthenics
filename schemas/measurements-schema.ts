@@ -15,6 +15,7 @@ export const measureSchema = z.object({
   thigh: z.number().optional(),
   calf: z.number().optional(),
   measure_date: z.string().optional(),
+  bf_index: z.number().optional(),
 });
 
 export type Measurements = z.infer<typeof measureSchema>;
@@ -31,4 +32,5 @@ export const addMeasureSchema = z.object({
   thigh: z.string().optional(),
   calf: z.string().optional(),
   measure_date: z.date().optional(),
+  bf_index: z.number().optional(),
 });

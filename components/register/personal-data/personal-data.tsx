@@ -78,7 +78,7 @@ const PersonalData = () => {
         gender: personalData.gender.toString(),
       });
     }
-  }, [getToken, personalData, setPersonalData]);
+  }, [getToken, personalData, setPersonalData, form]);
 
   const onSubmit = async (values: PersonalDataFormValues) => {
     try {
@@ -122,59 +122,65 @@ const PersonalData = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 flex items-center justify-center w-full"
       >
-        <div className="flex items-center justify-center space-x-2 max-w-sm">
-          <FormField
-            control={form.control}
-            name="height"
-            render={({ field }) => (
-              <FormItem>
-                {/* <FormLabel>Titolo</FormLabel> */}
-                <FormControl>
-                  <Input placeholder="Height [cm]" type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="gender"
-            render={({ field }) => (
-              <FormItem>
-                {/* <FormLabel>Priorità</FormLabel> */}
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Sex" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {genders.map((g) => (
-                        <SelectItem key={g.label} value={g.value}>
-                          <div className="flex w-full items-start">
-                            {g.icon && (
-                              <g.icon className={cn("mr-2 h-4 w-4", g.color)} />
-                            )}
-                            <span>{g.label}</span>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <div className="flex items-center justify-center space-x-2 max-w-md">
+          <div className="flex-1">
+            <FormField
+              control={form.control}
+              name="height"
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>Titolo</FormLabel> */}
+                  <FormControl>
+                    <Input placeholder="Height [cm]" type="number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex-1">
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>Priorità</FormLabel> */}
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Sex" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {genders.map((g) => (
+                          <SelectItem key={g.label} value={g.value}>
+                            <div className="flex items-start">
+                              {g.icon && (
+                                <g.icon
+                                  className={cn("mr-2 h-4 w-4", g.color)}
+                                />
+                              )}
+                              <span>{g.label}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           {personalData ? (
             <Button
               type="submit"
               // disabled={loading}
               size="lg"
               variant="premium"
-              className="w-full h-10"
+              className="flex-1 h-10"
             >
               Update
               <PlusCircle className="w-4 h-4 ml-2 " />
@@ -185,7 +191,7 @@ const PersonalData = () => {
               // disabled={loading}
               size="lg"
               variant="premium"
-              className="w-full h-10"
+              className="flex-1 h-10"
             >
               Add
               <PlusCircle className="w-4 h-4 ml-2 " />
