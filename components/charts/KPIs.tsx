@@ -44,7 +44,7 @@ export default function KPIs() {
     ) => {
       const data_filtered = data.filter((d) => d[measure] !== 0);
       const a = data_filtered.map((item: Measurements) =>
-        format(new Date(item.measure_date!), "MMM yy")
+        format(new Date(item.measure_date!), "dd MMM yy")
       );
       const b = data_filtered.map((item: Measurements) => item[measure]);
 
@@ -81,7 +81,7 @@ export default function KPIs() {
             metricPrev: `${unit} 0`,
             delta: "0 %",
             deltaType: "unchanged",
-            data: [{ month: format(new Date(), "MMM yy"), value: 0 }],
+            data: [{ month: format(new Date(), "dd MMM yy"), value: 0 }],
           };
           return cat;
         }
@@ -134,7 +134,7 @@ export default function KPIs() {
         metricPrev: `${unit} 0`,
         delta: "0 %",
         deltaType: "unchanged",
-        data: [{ month: format(new Date(), "MMM yy"), value: 0 }],
+        data: [{ month: format(new Date(), "dd MMM yy"), value: 0 }],
       };
       return cat;
     };
