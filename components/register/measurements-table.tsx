@@ -30,7 +30,7 @@ export default function MeasurementsTable() {
           const { data } = await supabase
             .from("measurements")
             .select("*")
-            .order("measure_date", { ascending: false });
+            .order("measure_date", { ascending: true });
           setMeasurements(data!);
         }
       } catch (e) {
